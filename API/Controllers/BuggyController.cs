@@ -3,6 +3,7 @@ using API.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace API.Controllers
 {
     public class BuggyController : BaseApiController
@@ -43,7 +44,7 @@ namespace API.Controllers
         }
 
         [HttpGet("bad-request")]
-        public ActionResult<string> GetBadRequest()
+        public IActionResult GetBadRequest()
         {
             return BadRequest("This was not a good request");
         }

@@ -26,9 +26,6 @@ export class NavBarComponent implements OnInit {
         this.toastrService.success('You are loged in successfully...we are redirecting you to the members page!');
         this.router.navigateByUrl('/members');
       },
-      error: (error)=>{
-        this.toastrService.error(error.error);
-      }
     });
   }
 
