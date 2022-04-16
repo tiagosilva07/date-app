@@ -58,7 +58,7 @@ export class TestErrorsComponent implements OnInit {
   }
 
   get400ValidationError(){
-    this.http.get(this.baseUrl + 'buggy/not-found').subscribe({
+    this.http.get(this.baseUrl + 'account/register').subscribe({
       next:(response)=>{
         console.log(response);
       },
