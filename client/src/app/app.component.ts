@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/models/user';
+import { AccountService } from './services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -9,20 +11,15 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'DateApp';
   users : any;
-  constructor( private http: HttpClient){  }
+  constructor(private accountService: AccountService){  }
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.getUsers();
+    this.setCurrentUser();
   }
-  getUsers(){
-    this.http.get('https://localhost:5001/api/users').subscribe({
-      next: (response)=>{
-        this.users = response;
-      },
-      error:(e)=>{
-        console.log(e);
-      }
-    });
+
+  setCurrentUser(){
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    this.accountService.setCurrentUser(user);
   }
+
+
 }
