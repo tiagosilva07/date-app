@@ -20,7 +20,7 @@ export class AccountService {
       map( (response: User) =>{
         const user = response;
         if(user){
-          this.setLocalStorageUser(user);
+          this.setCurrentUser(user);
         }
       })
     );
@@ -30,14 +30,14 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'account/register',model).pipe(
      map((user: User)=>{
        if(user){
-        this.setLocalStorageUser(user);
+        this.setCurrentUser(user);
        }
      })
     )
   }
 
   setCurrentUser(user:User){
-    this.currentUserSource.next(user);
+    this.setLocalStorageUser(user);
   }
 
   logout(){
