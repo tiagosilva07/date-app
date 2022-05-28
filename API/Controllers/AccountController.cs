@@ -2,6 +2,7 @@
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
@@ -13,11 +14,12 @@ namespace API.Controllers
     {
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
-
-        public AccountController (DataContext context, ITokenService tokenService)
+        private readonly IMapper _mapper;
+        public AccountController (DataContext context, ITokenService tokenService, IMapper mapper)
         {
             _context = context;
             _tokenService = tokenService;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
@@ -25,21 +27,23 @@ namespace API.Controllers
         {
             if(await UserExists(registerDto.userName)) return BadRequest("UserName is Taken");
 
+            var user = _mapper.Map<AppUser>(registerDto);
            
             using var hmac = new HMACSHA512();
 
-            var user = new AppUser 
-            { 
-                UserName = registerDto.userName.ToLower(), 
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.password)),
-                PasswordSalt = hmac.Key,
-            };
+            user.UserName = registerDto.userName.ToLower();
+            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.password));
+            user.PasswordSalt = hmac.Key;
+          
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
             
 
-            return  new UserDto { userName = user.UserName, token =_tokenService.CreateToken(user) };
+            return  new UserDto { 
+                userName = user.UserName, 
+                token =_tokenService.CreateToken(user) , 
+                KnownAs = user.KnownAs };
         }
 
         [HttpPost("login")]
@@ -63,10 +67,11 @@ namespace API.Controllers
                 if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid Password");
             }
 
-            return new UserDto { 
-                userName = user.UserName, 
+            return new UserDto {
+                userName = user.UserName,
                 token = _tokenService.CreateToken(user),
-                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
+                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
+                KnownAs = user.KnownAs
             };
 
         }
