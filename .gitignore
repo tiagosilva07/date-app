@@ -363,7 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 appsettings.json
-
-
-API/dateapp.db-shm
 API/dateapp.db

@@ -14,18 +14,18 @@ import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 //Modules
 import { AppRoutingModule } from './app-routing.module';
-import { SharedModule } from './modules/shared.module';
+import { SharedModule } from './_modules/shared.module';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
-import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
-import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
-import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
-import { TextInputComponent } from './forms/text-input/text-input.component';
-import { DateInputComponent } from './forms/date-input/date-input.component';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { DateInputComponent } from './_forms/date-input/date-input.component';
 
 @NgModule({
   declarations: [

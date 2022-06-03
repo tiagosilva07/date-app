@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
-import { AuthGuard } from './guards/auth.guard';
-import { PreventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
+import { AuthGuard } from './_guards/auth.guard';
+import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { HomeComponent } from './home/home.component';
 import { ListsComponent } from './lists/lists.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
