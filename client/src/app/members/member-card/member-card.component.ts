@@ -1,5 +1,8 @@
+import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, Input, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/_models/member';
+import { MembersService } from 'src/app/_services/members.service';
 
 @Component({
   selector: 'app-member-card',
@@ -9,9 +12,14 @@ import { Member } from 'src/app/_models/member';
 export class MemberCardComponent implements OnInit {
 
   @Input() member : Member
-  constructor() { }
+  constructor(private membersService: MembersService, private toatr: ToastrService) { }
 
   ngOnInit(): void {
   }
 
+  addLike(member: Member){
+    this.membersService.addLike(member.userName).subscribe(()=>{
+      this.toatr.success('You have liked '+ member.knownAs);
+    })
+  }
 }
