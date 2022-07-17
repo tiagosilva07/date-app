@@ -4,7 +4,7 @@
       No messages yet... Say hi by using the message box below
     </div>
     <ul *ngIf="(messageService.messageThread$ | async)?.length > 0">
-      <li *ngFor="let message of messages">
+      <li *ngFor="let message of (messageService.messageThread$ | async)">
         <div>
           <span class="chat-img float-end"><img class="rounded-circle"
             src="{{message.senderPhotoUrl|| './assets/user.png'}}"

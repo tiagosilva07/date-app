@@ -31,7 +31,10 @@
               "./node_modules/ngx-spinner/animations/line-scale-party.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "angular-slickgrid", "stream"
+            ]
           },
           "configurations": {
             "production": {
@@ -108,6 +111,5 @@
         }
       }
     }
-  },
-  "defaultProject": "client"
+  }
 }
